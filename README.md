@@ -34,12 +34,6 @@ ct-open/
 │   ├── winter_2025/
 │   └── summer_2025/
 ├── pipelines/
-│   ├── decontamination/
-│   ├── answer_generation/
-│   ├── trial_matching/
-│   ├── result_verification/
-│   ├── publication_date_extraction/
-│   └── web_retrieval/
 ├── evaluations/
 │   ├── prompt_based/
 │   ├── rag/
@@ -47,19 +41,7 @@ ct-open/
 │   ├── traditional_ml/
 │   └── neural_models/
 ├── prompts/
-│   ├── screening/
-│   ├── web_search/
-│   ├── verification/
-│   └── answer_checking/
-├── docs/
-│   ├── benchmark_design/
-│   ├── pipeline_overview/
-│   └── evaluation_protocol/
 └── outputs/
-    ├── intermediate/
-    ├── filtered_trials/
-    ├── verified_results/
-    └── metrics/
 ```
 
 This layout reflects the paper’s main components while staying implementation-agnostic. The benchmark has a **static component** with a training set and two time-stamped test sets, and a **dynamic component** with recurring benchmark releases.
