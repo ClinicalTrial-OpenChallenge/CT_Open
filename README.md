@@ -30,18 +30,34 @@ This repository is intended to support:
 ct-open/
 ├── README.md
 ├── datasets/
-│   ├── train/
-│   ├── winter_2025/
-│   └── summer_2025/
+│   ├── Winter_2025.pickle
+│   └── Summer_2025.pickle
 ├── pipelines/
-├── evaluations/
-│   ├── prompt_based/
-│   ├── rag/
-│   ├── agentic/
-│   ├── traditional_ml/
-│   └── neural_models/
-├── prompts/
-└── outputs/
+│   ├── create_pipeline_data.py
+│   ├── precheck_prompt_creation.py
+│   ├── generation.py
+│   ├── gemini_generation.py
+│   ├── brave_api.py
+│   ├── brave_search_single_query.py
+│   ├── websearch.py
+│   ├── zenrows_scraping.py
+│   ├── request_scraping.py
+│   ├── agent_zenrows.py
+│   ├── parse_html_page_multi_thread.py
+│   ├── parse_html_page_utils.py
+│   ├── get_html_date.py
+│   ├── process_dates.py
+│   ├── check_match_round1.py
+│   ├── check_match_round2.py
+│   ├── insert_to_db.py
+│   ├── replay_states.py
+│   ├── filtered_trials_nctid2trial.pickle
+│   ├── error_points.pickle
+│   ├── winter2025_round1_prompts.pickle
+│   ├── winter2025_websearch_round1_prompts.pickle
+│   └── run_brave_experiments.sh
+└── evaluations/
+    └── evaluation.py
 ```
 
 This layout reflects the paper’s main components while staying implementation-agnostic. The benchmark has a **static component** with a training set and two time-stamped test sets, and a **dynamic component** with recurring benchmark releases.
