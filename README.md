@@ -2,29 +2,29 @@
 
 Open-access benchmark and evaluation framework for **clinical trial outcome prediction**.
 
-This repository is designed around the CT Open setting: predicting clinical trial outcomes **before results become publicly available**, using contamination-resistant benchmark construction and time-stamped evaluation. CT Open includes a large-scale training set, two static benchmarks, and a recurring live evaluation setting built around quarterly challenge cycles.
+CT Open evaluates whether models can predict clinical trial outcomes **before results become publicly available**. The benchmark uses time-stamped train/test splits and a decontamination pipeline to reduce the risk that models rely on already-public trial results.
 
 ## Overview
 
-Clinical trial outcome prediction is a high-stakes forecasting problem with consequences for patients, clinicians, pharmaceutical companies, and investors. CT Open is built to evaluate whether AI systems can make useful predictions on trial outcomes **without relying on already-public results**. To support this, the benchmark uses an automated decontamination pipeline to exclude trials with publicly available outcome evidence prior to a benchmark cutoff date.
+Clinical trial outcome prediction is a high-stakes forecasting problem with consequences for patients, clinicians, pharmaceutical companies, and investors. CT Open focuses on prediction from publicly available trial information available before a fixed cutoff date. Trials with evidence of public results before the cutoff are excluded through an automated filtering and verification pipeline.
 
 CT Open supports three question classes:
 
-- **Superiority**: whether the treatment arm shows a statistically significant improvement over the comparator arm
-- **Comparative Effect**: whether one arm is significantly better, worse, or not different from the comparator
-- **Endpoint**: whether the endpoint is met, or whether at least one arm meets the endpoint
+* **Superiority**: whether the treatment arm shows a statistically significant improvement over the comparator arm
+* **Comparative Effect**: whether one arm is significantly better, worse, or not different from the comparator
+* **Endpoint**: whether the endpoint is met, or whether at least one arm meets the endpoint
 
 ## Repository Goals
 
-This repository is intended to support:
+This repository supports:
 
-- benchmark construction for contamination-resistant clinical trial forecasting
-- data preparation for train and time-stamped test sets
-- decontamination and public-result filtering
-- answer generation and answer verification
-- evaluation of prompt-only, retrieval-augmented, agentic, and traditional ML baselines
+* construction of contamination-resistant clinical trial forecasting benchmarks
+* preparation of train and time-stamped test sets
+* filtering of trials with public outcome evidence before the benchmark cutoff
+* answer generation and answer verification
+* evaluation of prompt-only, retrieval-augmented, agentic, and traditional ML baselines
 
-## Suggested Repository Structure
+## Repository Structure
 
 ```text
 ct-open/
@@ -60,22 +60,22 @@ ct-open/
     └── evaluation.py
 ```
 
-This layout reflects the paper’s main components while staying implementation-agnostic. The benchmark has a **static component** with a training set and two time-stamped test sets, and a **dynamic component** with recurring benchmark releases.
+The benchmark has a **static component** with a training set and two time-stamped test sets, and a **dynamic component** with recurring benchmark releases.
 
 ## Datasets
 
 CT Open includes three mutually disjoint trial sets:
 
-- **Train**: 7,292 unique trials and 15,444 total questions
-- **Winter 2025**: 314 unique trials and 605 total questions
-- **Summer 2025**: 240 unique trials and 857 total questions
+* **Train**: 7,292 unique trials and 15,444 total questions
+* **Winter 2025**: 314 unique trials and 605 total questions
+* **Summer 2025**: 240 unique trials and 857 total questions
 
 The static benchmarks are time-stamped:
 
-- **Winter 2025** uses a cutoff date of **February 1, 2025**
-- **Summer 2025** uses a cutoff date of **September 1, 2025**
+* **Winter 2025** uses a cutoff date of **February 1, 2025**
+* **Summer 2025** uses a cutoff date of **September 1, 2025**
 
-By construction, trials in each benchmark had no publicly available results before the corresponding cutoff date.
+Trials in each benchmark had no identified public results before the corresponding cutoff date.
 
 ## Benchmark Construction
 
@@ -83,71 +83,67 @@ By construction, trials in each benchmark had no publicly available results befo
 
 The decontamination pipeline filters out trials with evidence of public results before a benchmark cutoff. It combines:
 
-- LLM-based web search
-- search-engine-based retrieval
-- webpage scraping and downloadable file processing
-- publication date extraction
-- database search over sources such as PubMed, PMC, bioRxiv, and medRxiv
-- two-round verification to confirm both trial identity and presence of reported results
+* LLM-based web search
+* search-engine-based retrieval
+* webpage scraping and downloadable file processing
+* publication date extraction
+* database search over sources such as PubMed, PMC, bioRxiv, and medRxiv
+* two-round verification to confirm both trial identity and the presence of reported results
 
-The paper reports strong robustness for this pipeline, with manual review confirming at least **98% accuracy** under a conservative estimate.
+Manual review in the paper estimates the decontamination accuracy to be at least **98%** under a conservative evaluation.
 
 ### 2. Answer generation pipeline
 
-After decontamination, CT Open uses a multi-stage pipeline to determine whether result documents are sufficient to answer generated benchmark questions. Questions that cannot be supported with sufficient certainty are removed. The paper reports at least **99% accuracy** for answer generation under conservative evaluation.
+After decontamination, CT Open uses a multi-stage pipeline to check whether result documents are sufficient to answer generated benchmark questions. Questions that cannot be answered with sufficient certainty are removed. The paper estimates answer generation accuracy to be at least **99%** under a conservative evaluation.
 
 ## Evaluation Settings
 
-This repository is organized to support multiple modeling approaches discussed in the paper:
+This repository supports evaluation of:
 
-- **Prompt-based LLMs**
-- **LLMs with retrieval-augmented generation**
-- **Agentic LLMs**
-- **Traditional machine learning baselines**
-- **Neural network baselines**
+* **Prompt-based LLMs**
+* **LLMs with retrieval-augmented generation**
+* **Agentic LLMs**
+* **Traditional machine learning baselines**
+* **Neural network baselines**
 
-The agentic setting follows an iterative search-and-browse workflow where the model can:
-1. submit a new query,
-2. request the full content of a previously retrieved URL,
-3. summarize findings and update strategy,
-4. produce a final answer.
+In the agentic setting, the model can iteratively search, open retrieved pages, summarize findings, and produce a final prediction.
 
 ## Challenge Schedule
 
 CT Open is designed as a recurring benchmark with four annual challenge cycles:
 
-- **Winter Open**: December to March
-- **Spring Open**: March to June
-- **Summer Open**: June to September
-- **Fall Open**: September to December
+* **Winter Open**: December to March
+* **Spring Open**: March to June
+* **Summer Open**: June to September
+* **Fall Open**: September to December
 
-Participants submit predictions before a challenge window begins, and evaluations are performed only on trials whose outcomes became public during that window but were not public beforehand.
+Participants submit predictions before a challenge window begins. Evaluation is performed on trials whose outcomes became public during the challenge window and were not public beforehand.
 
-## What This Repository Contains
+## Repository Contents
 
-Depending on your implementation, this repository can be used to host:
+The repository includes:
 
-- processed benchmark datasets
-- metadata for trials, endpoints, and study arms
-- intermediate retrieval and filtering artifacts
-- prompt templates for search, matching, verification, and answer checking
-- training and evaluation pipelines
-- benchmark metrics and leaderboard generation code
+* processed benchmark datasets
+* metadata for trials, endpoints, and study arms
+* intermediate retrieval and filtering artifacts
+* prompt templates for search, matching, verification, and answer checking
+* training and evaluation pipelines
+* benchmark metrics and leaderboard generation code
 
 ## Intended Use
 
 This project is intended for research on:
 
-- clinical trial forecasting
-- contamination-resistant benchmark design
-- retrieval and agentic reasoning for scientific prediction
-- evaluation of LLM and non-LLM approaches on time-stamped, open-world tasks
+* clinical trial forecasting
+* contamination-resistant benchmark design
+* retrieval and agentic reasoning for scientific prediction
+* evaluation of LLM and non-LLM approaches on time-stamped, open-world tasks
 
 ## Notes
 
-- The benchmark is designed around **publicly available aggregate trial information**, not patient-level data.
-- Trial sets for train, Winter 2025, and Summer 2025 are **mutually disjoint**.
-- The repository structure here is a **suggested organization** derived from the paper, not an attempt to reproduce unpublished internal filenames.
+* The benchmark uses publicly available aggregate trial information, not patient-level data.
+* Trial sets for Train, Winter 2025, and Summer 2025 are mutually disjoint.
+* This repository is organized to match the main components of the CT Open benchmark.
 
 ## Citation
 
