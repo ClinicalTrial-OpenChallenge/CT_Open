@@ -71,6 +71,7 @@ CT Open includes three mutually disjoint trial sets:
 * **Summer 2025**: 240 unique trials and 857 total questions
 
 Since github can't upload file that exceed 25MB, so we devide it into 3 parts, please merge them when you want to use the Train data.
+
 The static benchmarks are time-stamped:
 
 * **Winter 2025** uses a cutoff date of **February 1, 2025**
