@@ -8,7 +8,7 @@ def evaluate_multiple_runs(list_of_eval_rets, benchmark_data, ignore_nctids={}):
     IMPLICIT_ARMS = {'no_arm', 'no_distinguishable_arm'}
     EXPLICIT_ARMS = {'distinguishable_arm', 'single_arm'}
     
-    categories = ['2-way_implicit', '2-way_explicit', '3-way_explicit']
+    categories = ['Endpoint', 'Superiority', 'ComparativeEffect']
     
     # Store metrics for each run so we can average them at the end
     # Structure: all_runs_metrics[run_idx][cat] = {'overall': {...}, 'classes': {0: {...}, 1: {...}}}
@@ -42,6 +42,12 @@ def evaluate_multiple_runs(list_of_eval_rets, benchmark_data, ignore_nctids={}):
                 raise Exception('meta_label not in IMPLICIT_ARMS or EXPLICIT_ARMS')
                 
             cat_key = f"{num_options}-way_{arm_group}"
+            if cat_key == '2-way_implicit':
+                cat_key = 'Endpoint'
+            elif cat_key == '2-way_explicit':
+                cat_key = 'Superiority'
+            elif cat_key == '3-way_explicit':
+                cat_key = 'ComparativeEffect'
             if cat_key not in categories:
                 raise Exception('cat_key not in categories')
                 
