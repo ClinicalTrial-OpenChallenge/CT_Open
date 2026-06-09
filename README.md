@@ -15,7 +15,7 @@ CT Open supports three question classes:
 * **Endpoint**: whether the endpoint is met, or whether at least one arm meets the endpoint
 
 
-## How to evaluate the result
+## How to evaluate the output
 
 The `evaluations/evaluation.py` script provides the official evaluation logic for CT Open model outputs.
 
