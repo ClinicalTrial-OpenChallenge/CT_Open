@@ -140,7 +140,7 @@ The script also reports overall metrics by averaging across categories.
 In general, stronger models should achieve higher weighted accuracy, higher macro-F1, and lower cross-entropy.
 
 ### How to use it:
-Set the main function as fullow:
+Set the main function as follow:
 
 ```python
 with open(PATH_TO_BENCHMARK_DATA, 'rb') as f:
