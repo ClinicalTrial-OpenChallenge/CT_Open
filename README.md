@@ -139,6 +139,23 @@ The script also reports overall metrics by averaging across categories.
 
 In general, stronger models should achieve higher weighted accuracy, higher macro-F1, and lower cross-entropy.
 
+### How to use it:
+Set the main function as fullow:
+
+```python
+with open(PATH_TO_BENCHMARK_DATA, 'rb') as f:
+    benchmark_data = pickle.load(f)
+
+with open(PATH_TO_RESULT_1, 'rb') as f:
+    ret_1 = pickle.load(f)
+
+with open(PATH_TO_RESULT_2, 'rb') as f:
+    ret_2 = pickle.load(f)
+
+list_of_eval_rets = [ret_1, ret_2]
+evaluate_multiple_runs(list_of_eval_rets, benchmark_data)
+```
+
 ## Repository Goals
 
 This repository supports:
