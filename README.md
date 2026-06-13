@@ -252,6 +252,59 @@ This repository supports evaluation of:
 
 In the agentic setting, the model can iteratively search, open retrieved pages, summarize findings, and produce a final prediction.
 
+## RAG Prompt Data
+
+The prompts used for our RAG method can be found at:
+
+```text
+<path-to-rag-prompt-file>
+```
+
+This file stores the complete RAG prompts as a Python dictionary.
+
+### Data Format
+
+The RAG prompt file is organized as a dictionary. Each key is a tuple with three elements:
+
+```python
+(nctid, outcome_measure, question_index_in_each_nctid)
+```
+
+where:
+
+* `nctid` is a string representing the ClinicalTrials.gov trial identifier.
+* `outcome_measure` is a stringified dictionary describing the corresponding outcome measure.
+* `question_index_in_each_nctid` is an integer indicating the question index within the same NCT ID.
+
+This key format is the same as the key format used in the benchmark data. Therefore, users can directly use the key to locate the corresponding question in the benchmark.
+
+### Prompt Content
+
+Each value in the dictionary is a string containing the full RAG prompt for the corresponding question. The prompt can be divided into three main parts.
+
+#### 1. Instruction
+
+The first part provides the task instruction to the language model. It explains that the model will be given information about the current trial, together with information from historical trials that are considered relevant to the current trial. The model is then asked to answer the question and provide the reasoning behind its decision.
+
+#### 2. Current Trial Information
+
+The second part contains information about the current trial. This may include the biological mechanism of the drug, patient eligibility criteria, study arm information, and the specific proposed outcome measure.
+
+#### 3. Relevant Historical Trial Information
+
+The third part contains historical trials that are considered relevant to the current trial. Each retrieved trial is labeled as:
+
+```text
+Relevant Trial 0
+Relevant Trial 1
+Relevant Trial 2
+...
+```
+
+Each relevant trial follows a structure similar to the current trial information, allowing the model to compare the target trial with related completed trials and reason about the likely outcome.
+
+
+
 ## Challenge Schedule
 
 CT Open is designed as a recurring benchmark with four annual challenge cycles:
