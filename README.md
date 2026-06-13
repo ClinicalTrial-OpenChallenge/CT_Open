@@ -254,13 +254,10 @@ In the agentic setting, the model can iteratively search, open retrieved pages, 
 
 ## RAG Prompt Data
 
-The prompts used for our RAG method can be found at:
+The prompts used for our RAG method can be found at Evaluatios folder. They are divided into several parts since the github limit the file that bigger than 25MB.
+Please merge them before use them.
 
-```text
-<path-to-rag-prompt-file>
-```
-
-This file stores the complete RAG prompts as a Python dictionary.
+The file stores the complete RAG prompts as a Python dictionary.
 
 ### Data Format
 
