@@ -45,6 +45,7 @@ Ramamohan Paturi<sup>1</sup>, Umber Dube<sup>2</sup>, Leon Bergen<sup>1</sup>
 * [Repository Contents](#repository-contents)
 * [Intended Use](#intended-use)
 * [Notes](#notes)
+* [License](#license)
 * [Citation](#citation)
 
 Open-access benchmark and evaluation framework for **clinical trial outcome prediction**.
@@ -384,6 +385,12 @@ This project is intended for research on:
 
 * The benchmark uses publicly available aggregate trial information, not patient-level data.
 * Trial sets for Train, Winter 2025, and Summer 2025 are mutually disjoint.
+
+## License
+
+Code in this repository is released under the Apache License 2.0 (see `LICENSE`).
+The CT Open datasets (`datasets/` and the evaluation pickles) are released under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## Citation
 
