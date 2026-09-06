@@ -1,4 +1,51 @@
-# CT Open
+<div align="center">
+<h1>CT Open: An Open-Access, Uncontaminated, Live Platform for the Open Challenge of Clinical Trial Outcome Prediction (COLM 2026)</h1>
+
+<p>
+<b>
+Jianyou Wang<sup>1*</sup>, Youze Zheng<sup>1*</sup>, Longtian Bao<sup>1*</sup>, Hanyuan Zhang<sup>1*</sup><br>
+Qirui Zheng<sup>1</sup>, Yuhan Chen<sup>1</sup>, Yang Zhang<sup>1</sup>, Matthew Feng<sup>1</sup><br>
+Maxim Khan<sup>3</sup>, Aditya K. Sehgal<sup>3</sup>, Christopher D. Rosin<sup>3</sup><br>
+Ramamohan Paturi<sup>1</sup>, Umber Dube<sup>2</sup>, Leon Bergen<sup>1</sup>
+</b>
+</p>
+</div>
+
+<p>
+<sup>1</sup> Laboratory for Emerging Intelligence (LEI), University of California San Diego<br>
+<sup>2</sup> Department of Dermatology, University of California San Diego<br>
+<sup>3</sup> Elsevier<br>
+<sup>*</sup> Equal contribution
+</p>
+
+<div align="center">
+
+[![COLM 2026](https://img.shields.io/badge/COLM-2026-00629B?style=flat&labelColor=182B49)](https://colmweb.org/)&nbsp; [![arXiv](https://img.shields.io/badge/arXiv-2604.16742-00629B?style=flat&labelColor=182B49)](https://arxiv.org/abs/2604.16742)
+</div>
+
+## Table of Contents
+* [Overview](#overview)
+* [How to evaluate the output](#how-to-evaluate-the-output)
+  * [Prediction Format](#prediction-format)
+  * [Example](#example)
+  * [Evaluation Procedure](#evaluation-procedure)
+  * [Evaluation Outputs](#evaluation-outputs)
+  * [How to use it](#how-to-use-it)
+* [Repository Goals](#repository-goals)
+* [Repository Structure](#repository-structure)
+* [Datasets](#datasets)
+* [Benchmark Construction](#benchmark-construction)
+  * [Decontamination pipeline](#1-decontamination-pipeline)
+  * [Answer generation pipeline](#2-answer-generation-pipeline)
+* [Evaluation Settings](#evaluation-settings)
+* [RAG Prompt Data](#rag-prompt-data)
+  * [Data Format](#data-format)
+  * [Prompt Content](#prompt-content)
+* [Challenge Schedule](#challenge-schedule)
+* [Repository Contents](#repository-contents)
+* [Intended Use](#intended-use)
+* [Notes](#notes)
+* [Citation](#citation)
 
 Open-access benchmark and evaluation framework for **clinical trial outcome prediction**.
 
@@ -337,17 +384,18 @@ This project is intended for research on:
 
 * The benchmark uses publicly available aggregate trial information, not patient-level data.
 * Trial sets for Train, Winter 2025, and Summer 2025 are mutually disjoint.
-* This repository is organized to match the main components of the CT Open benchmark.
 
 ## Citation
 
 If you use this repository or build on the benchmark design, please cite the CT Open paper.
 
 ```bibtex
-@article{ctopen2026,
-  title={CT Open: An Open-Access, Uncontaminated, Live Platform for the Open Challenge of Clinical Trial Outcome Prediction},
-  author={Anonymous authors},
-  journal={Under review as a conference paper at COLM 2026},
-  year={2026}
+@inproceedings{
+    wang2026ct,
+    title={{CT} Open: An Open-Access, Uncontaminated, Live Platform for the Open Challenge of Clinical Trial Outcome Prediction},
+    author={Jianyou Wang and Youze Zheng and Longtian Bao and Hanyuan Zhang and Qirui Zheng and Yuhan Chen and Yang Zhang and Matthew Feng and Maxim Khan and Aditya K Sehgal and Christopher D. Rosin and Mohan Paturi and Umber Dube and Leon Bergen},
+    booktitle={Third Conference on Language Modeling},
+    year={2026},
+    url={https://openreview.net/forum?id=pbGCyTrXsl}
 }
 ```
